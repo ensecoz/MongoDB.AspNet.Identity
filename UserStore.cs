@@ -16,13 +16,16 @@ namespace MongoDB.AspNet.Identity
     /// </summary>
     /// <typeparam name="TUser">The type of the t user.</typeparam>
     public class UserStore<TUser> : UserStore<TUser, IdentityRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>, IUserStore<TUser>, IUserStore<TUser, string>, IDisposable
-    where TUser : IdentityUser
+        where TUser : IdentityUser
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStore{TUser}"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public UserStore(IdentityDbContext context) : base(context.db) { }
+
+        public UserStore(IdentityDbContext<TUser> context) : base(context.db) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStore{TUser}"/> class.
         /// </summary>
