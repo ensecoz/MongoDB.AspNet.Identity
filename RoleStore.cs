@@ -15,9 +15,20 @@ namespace MongoDB.AspNet.Identity
 
 
     public class RoleStore<TRole> : RoleStore<TRole, string, IdentityUserRole>, IQueryableRoleStore<TRole>, IQueryableRoleStore<TRole, string>, IRoleStore<TRole, string>, IDisposable
-    where TRole : IdentityRole, new()
+        where TRole : IdentityRole, new()
     {
-        public RoleStore() : base(new IdentityDbContext().db) { }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoleStore{TUser}"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        public RoleStore(IdentityDbContext context) : base(context.db) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserStore{TUser}"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
+        public RoleStore(MongoDatabase db) : base(db) { }
     }
 
     public class RoleStore<TRole, TKey, TUserRole> : IQueryableRoleStore<TRole, TKey>, IRoleStore<TRole, TKey>, IDisposable
